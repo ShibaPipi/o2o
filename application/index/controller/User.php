@@ -4,15 +4,15 @@ namespace app\index\controller;
 
 use think\Controller;
 
-class Index extends Controller
+class User extends Controller
 {
-    public function index()
+    public function login()
     {
         return $this->fetch();
     }
 
-    public function test()
+    public function register()
     {
-        return 'test';
+        return $this->fetch();
     }
 }
