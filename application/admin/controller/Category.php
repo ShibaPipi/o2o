@@ -6,14 +6,24 @@ use think\Controller;
 
 class Category extends Controller
 {
+    private $obj;
+
+    public function _initialize()
+    {
+        $this->obj = model('category');
+    }
+
     public function index()
     {
-        return $this->fetch();
+        $parentId = input('get.parent_id', 0, 'intval');
+        $categories = $this->obj->getFirstCategory($parentId);
+        return $this->fetch('', compact('categories'));
     }
 
     public function add()
     {
-        return $this->fetch();
+        $categories = $this->obj->getNormalFirstCategory();
+        return $this->fetch('', compact('categories'));
     }
 
     public function save()
@@ -28,5 +38,21 @@ class Category extends Controller
             $this->error($validate->getError());
         }
         // 把 $data 数据提交给 Model 层
+        $res = $this->obj->add($data);
+        if ($res) {
+            $this->success('新增成功');
+        } else {
+            $this->error('新增失败');
+        }
+    }
+
+    public function edit($id = 0)
+    {
+        if (intval($id) < 1) {
+            $this->error('参数不合法');
+        }
+        $category = $this->obj->get($id);
+        $categories = $this->obj->getNormalFirstCategory();
+        return $this->fetch('', compact('categories', 'category'));
     }
 }
