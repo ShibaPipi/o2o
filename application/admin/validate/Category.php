@@ -11,12 +11,13 @@ class Category extends Validate
         ['parent_id', 'require|number'],
         ['id', 'number'],
         ['status', 'number|in:-1,0,1', '状态必须是数字|状态范围不合法'],
-        ['list_order', 'number']
+        ['list_order', 'number'],
     ];
 
     /** 场景设置 **/
     protected $scene = [
-        'add' => ['name', 'parent_id'],
-        'list_order' => ['id', 'list_order']
+        'add' => ['name', 'parent_id', 'id'],
+        'list_order' => ['id', 'list_order'],
+        'status' => ['id', 'status'],
     ];
 }

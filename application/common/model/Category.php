@@ -23,6 +23,7 @@ class Category extends Model
         ];
 
         $order = [
+            'list_order' => 'desc',
             'id' => 'desc'
         ];
 
@@ -37,6 +38,7 @@ class Category extends Model
         ];
 
         $order = [
+            'list_order' => 'desc',
             'id' => 'desc'
         ];
 
