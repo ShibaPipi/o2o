@@ -8,6 +8,7 @@ class Map
     /**
      * 根据地址获取经纬度
      * @param $address
+     * @return array
      */
     public static function getLngLat($address)
     {
@@ -21,15 +22,17 @@ class Map
         ];
 
         $url = config('map.baidu_map_url') . config('map.geocoder') . '?' . http_build_query($data);
-
-        return doCurl($url);
+        $result = doCurl($url);
+        if ($result) return json_decode($result, true);
+        else return [];
     }
 
     /**
      * 根据经纬度获取百度地图
      * @param $center
      */
-    public static function staticImage($center){
+    public static function staticImage($center)
+    {
         // http://api.map.baidu.com/staticimage/v2
         if (!$center) return '';
 
@@ -38,7 +41,7 @@ class Map
             'width' => config('map.width'),
             'height' => config('map.height'),
             'center' => $center,
-            'markers'=>$center
+            'markers' => $center
         ];
 
         $url = config('map.baidu_map_url') . config('map.staticimage') . '?' . http_build_query($data);

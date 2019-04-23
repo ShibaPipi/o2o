@@ -10,6 +10,7 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+
 function status($status)
 {
     if ($status === 1) {
@@ -37,7 +38,7 @@ function doCurl($url, $type = 0, $data = [])
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_HEADER, 0);
 
-    if ($type ===1) {
+    if ($type === 1) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     }
@@ -48,4 +49,45 @@ function doCurl($url, $type = 0, $data = [])
     curl_close($ch);
 
     return $output;
+}
+
+// 商户入驻申请文案
+function bisRegister($status)
+{
+    switch ($status) {
+        case 1:
+            $str = '入驻申请成功！';
+            break;
+        case 0:
+            $str = '待审核，成功后会发送邮件通知！';
+            break;
+        case 2:
+            $str = '抱歉，您提交的材料不符合条件！';
+            break;
+        default:
+            $str = '该申请已被删除！';
+            break;
+    }
+    return $str;
+}
+
+/**
+ * 分页通用样式
+ * @param $obj
+ */
+function pagination($obj)
+{
+    if (!$obj) return '';
+    return '<div class="cl pd-5 bg-1 bk-gray mt-20 tp5-o2o">' . $obj->render() . '</div>';
+}
+
+function getSeCityName($path)
+{
+    if (empty($path)) return '';
+    if (preg_match('/,/', $path)) {
+        $cityPath = explode(',', $path);
+        $cityId = $cityPath[1];
+    } else $cityId = $path;
+    $city = model('City')->get($cityId);
+    return $city->name;
 }

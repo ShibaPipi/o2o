@@ -5,7 +5,7 @@
 
 namespace phpmailer;
 
-class Email
+class Mail
 {
     /**
      * @param $to
