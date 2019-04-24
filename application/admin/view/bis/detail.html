@@ -16,8 +16,7 @@
 				<select name="city_id" class="select cityId">
 					<option value="0">--请选择--</option>
 					{volist name="cities" id="vo"}
-					    <option
-                                value="{$vo.id}"
+					    <option value="{$vo.id}"
                                 {if condition="$bisData.city_id eq $vo.id" }
                                 selected
                                 {/if}
@@ -49,7 +48,7 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2">商户介绍：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <script id="editor1" type="text/plain" name="description" style="width:80%;height:300px;">{$bisData.description}</script>
+                <script id="editor1" type="text/plain" name="description" style="width:80%;height:300px;">{$bisData.description|html_entity_decode}</script>
             </div>
         </div>
         <div class="row cl">
@@ -154,12 +153,6 @@
 </article>
 
 <!--包含尾部文件-->
-<script>
-    var SCOPE = {
-        cityUrl: '{:url(\'api/city/getCitiesByParentId\')}',
-        categoryUrl: '{:url(\'api/category/getCategoryByParentId\')}',
-    }
-</script>
 {include file="public/footer" /}
 <script type="text/javascript" src="__STATIC__/admin/hui/lib/ueditor/1.4.3/ueditor.config.js"></script>
 <script type="text/javascript" src="__STATIC__/admin/hui/lib/ueditor/1.4.3/ueditor.all.min.js"></script>
