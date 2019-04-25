@@ -16,7 +16,7 @@ class Register extends Controller
     public function add()
     {
         if (!request()->isPost()) $this->error('请求错误');
-        $data = input('post.');
+        $data = input('post.', [], 'htmlentities');
         // 检验数据
         $validate = validate('Bis');
         if (!$validate->scene('add')->check($data)) $this->error($validate->getError());

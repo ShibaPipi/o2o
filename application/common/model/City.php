@@ -20,4 +20,16 @@ class City extends Model
 
         return self::where($data)->order($order)->select();
     }
+
+    public function getNormalCity()
+    {
+        $data = [
+            'status' => 1,
+            'parent_id' => ['gt', 0],
+        ];
+        $order = [
+            'id' => 'desc',
+        ];
+        return $this->where($data)->order($order)->select();
+    }
 }
