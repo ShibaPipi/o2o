@@ -38,8 +38,42 @@ class Deal extends BaseModel
         if ($limit) {
             $result = $result->limit($limit);
         }
-//        $result->select();
+//        print_r($result->select());exit;
 //        print_r($this->getLastSql());exit;
         return $result->select();
+    }
+
+    public function getDealByConditions($data = [], $orders = [])
+    {
+        if (!empty($order['order_sales'])) {
+            $order['buy_count'] = 'desc';
+        }
+        if (!empty($order['order_price'])) {
+            $order['current_price'] = 'desc';
+        }
+        if (!empty($order['order_time'])) {
+            $order['create_time'] = 'desc';
+        }
+        // mysql find_in_set()
+        $order['id'] = 'desc';
+        $datas[] = 'end_time > ' . time();
+
+        if (!empty($data['se_category_id'])) {
+            $datas[] = ' find_in_set(' . $data['se_category_id'] . ', se_category_id)';
+        }
+
+        if (!empty($data['category_id'])) {
+            $datas[] = ' category_id = ' . $data['category_id'];
+        }
+
+        if (!empty($data['city_id'])) {
+            $datas[] = ' city_id = ' . $data['city_id'];
+        }
+
+        $datas[] = 'status = 1';
+
+        $res = $this->where(implode(' AND ', $datas))->order($order)->paginate();
+//echo $this->getLastSql();exit;
+        return $res;
     }
 }

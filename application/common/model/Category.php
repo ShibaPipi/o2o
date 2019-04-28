@@ -45,11 +45,19 @@ class Category extends BaseModel
         return $result;
     }
 
+    /**
+     * 获取一级分类列表
+     * @param int $parentId
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function getNormalCategoryByParentId($parentId = 0)
     {
         $data = [
+            'parent_id' => $parentId,
             'status' => 1,
-            'parent_id' => $parentId
         ];
 
         $order = [
@@ -98,8 +106,4 @@ class Category extends BaseModel
         return $result;
     }
 
-    public function aa($a = 0)
-    {
-        return $a;
-    }
 }
