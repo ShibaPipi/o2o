@@ -2,13 +2,20 @@
 
 namespace app\index\controller;
 
-use think\Controller;
-
-class Index extends Controller
+class Index extends BaseController
 {
     public function index()
     {
-        return $this->fetch();
+        // 获取首页大图
+
+        // 获取广告位
+
+        // 获取推荐商品数据 美食
+        $deals = model('Deal')->getNormalDealByCatCityId(1, $this->city->id);
+        // 获取四个子分类
+        $subCats = model('Category')->getNormalRecommendCatsByParentId(1, 4);
+//print_r($deals);exit;
+        return $this->fetch('', compact('deals', 'subCats'));
     }
 
     public function test()

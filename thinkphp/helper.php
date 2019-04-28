@@ -553,6 +553,9 @@ if (!function_exists('token')) {
     }
 }
 
+/**
+ * image-captcha 1.0.8 助手函数内容
+ */
 
 Route::get('captcha/[:id]', "\\think\\captcha\\src\\CaptchaController@index");
 
@@ -608,3 +611,5 @@ function captcha_check($value, $id = "", $config = [])
     $captcha = new Captcha($config);
     return $captcha->check($value, $id);
 }
+
+/** 以上是 image-captcha 1.0.8 助手函数内容 **/

@@ -23,9 +23,9 @@ class Featured extends BaseController
     {
         if (request()->isPost()) {
             $data = input('post.');
-            unset($data['file']);
+//            unset($data['file']);
 //            print_r($data);exit;
-            $id = model('Featured')->add($data);
+            $id = model('Featured')->allowField(true)->add($data);
             if ($id) $this->success('添加成功');
             else $this->error('添加失败');
         } else {

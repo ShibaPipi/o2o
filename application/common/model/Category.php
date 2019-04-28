@@ -2,9 +2,7 @@
 
 namespace app\common\model;
 
-use think\Model;
-
-class Category extends Model
+class Category extends BaseModel
 {
     protected $autoWriteTimestamp = true;
 
@@ -59,5 +57,49 @@ class Category extends Model
         ];
 
         return self::where($data)->order($order)->select();
+    }
+
+    public function getNormalRecommendCatsByParentId($id = 0, $limit = 5)
+    {
+        $data = [
+            'parent_id' => $id,
+            'status' => 1,
+        ];
+
+        $order = [
+            'list_order' => 'desc',
+            'id' => 'desc',
+        ];
+
+        $result = $this->where($data)->order($order);
+
+        if ($limit) {
+            $result = $result->limit($limit);
+        }
+
+//print_r($result->select());exit;
+        return $result->select();
+    }
+
+    public function getNormalCatsByParentId($parentIds)
+    {
+        $data = [
+            'parent_id' => ['in', implode(',', $parentIds)],
+            'status' => 1,
+        ];
+
+        $order = [
+            'list_order' => 'desc',
+            'id' => 'desc',
+        ];
+
+        $result = $this->where($data)->order($order)->select();
+
+        return $result;
+    }
+
+    public function aa($a = 0)
+    {
+        return $a;
     }
 }
