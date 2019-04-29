@@ -13,9 +13,9 @@
     <div class="static-hook-real static-hook-id-5"></div>
     <div class="p-item-info">
         <div class="w-item-info">
-            <h2>{$locations[0]->name}</h2>
+            <h2>{$deal->name}</h2>
             <div class="item-title">
-                <span class="text-main">{$deal->name}</span>
+                <span class="text-main">{$locations[0]->name}</span>
             </div>
             <div class="ii-images static-hook-real static-hook-id-6">
                 <div class="w-item-images">
@@ -105,7 +105,7 @@
                                     <a class="btn-buy btn-buy-qrnew j-btn-buy btn-hit"
                                        style="background: #c0c0c0;border-bottom: #c0c0c0">立即抢购</a>
                                     {else /}
-                                    <a href="" class="btn-buy btn-buy-qrnew j-btn-buy btn-hit">立即抢购</a>
+                                    <a class="o2o-click btn-buy btn-buy-qrnew j-btn-buy btn-hit">立即抢购</a>
                                     {/if}
                                 </div>
                             </div>
@@ -255,6 +255,12 @@
         $(".branch").removeClass("branch-open").addClass("branch-close");
         $(this).removeClass("branch-close").addClass("branch-open");
     });
+
+    $(".o2o-click").click(function () {
+        var count = $(".buycount-ctrl input").val()
+        var url = "{:url('order/confirm', ['id' => $deal.id])}&count=" + count
+        window.open(url)
+    })
 </script>
 </body>
 </html>

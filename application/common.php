@@ -105,3 +105,12 @@ function countLocation($ids)
 
     return 1;
 }
+
+// 设置订单号
+function setOrderSn()
+{
+    list($t1, $t2) = explode(' ', microtime());
+    $t3 = explode('.', $t1 * 10000);
+
+    return $t2 . $t3[0] . rand(10000, 99999);
+}
