@@ -24,12 +24,12 @@ class Detail extends BaseController
         // 优惠剩余数量
         $overPlus = $deal->total_count - $deal->buy_count;
         // 开团剩余时间
+        $timeData = '';
         $flag = 0;
 
         if ($deal->start_time > time()) {
             $flag = 1;
             $dTime = $deal->start_time - time();
-            $timeData = '';
             $day = floor($dTime / (3600 * 24));
 
             if ($day) {
